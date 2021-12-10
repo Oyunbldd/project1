@@ -4,8 +4,8 @@ import {NativeBaseProvider} from 'native-base';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
 import Welcome from './screens/welcome/welcome';
-import Welcome1 from './screens/welcome/welcome';
-import Welcome2 from './screens/welcome/welcome1';
+import Welcome1 from './screens/welcome/welcome1';
+import Welcome2 from './screens/welcome/welcome2';
 import Home from './screens/home/home';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 export default function App() {
