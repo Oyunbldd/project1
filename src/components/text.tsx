@@ -1,13 +1,14 @@
 import React from 'react';
 import {Box, Text} from 'native-base';
-const CustomText = ({text1, text2, unique}) => {
+const CustomText = ({text1, text2, unique, textunique}) => {
   return (
     <Box
       position={'absolute'}
       marginTop={5}
       alignSelf="flex-start"
       width="350"
-      height="170">
+      height="170"
+      padding={3}>
       <Box borderColor="gray.300" borderBottomWidth={1} padding={3}>
         <Text color="orange.400" fontSize="15" fontWeight="bold">
           LET'S GO!
@@ -15,12 +16,12 @@ const CustomText = ({text1, text2, unique}) => {
       </Box>
       <Box padding="3">
         <Text
-          fontSize="30"
+          fontSize={30}
           color={unique ? '#72978F' : 'black'}
           letterSpacing={1}>
           {text1}
         </Text>
-        <Text fontSize="30" letterSpacing={1} color={'black'}>
+        <Text fontSize={textunique ? 35 : 30} letterSpacing={1} color={'black'}>
           {text2}
         </Text>
       </Box>

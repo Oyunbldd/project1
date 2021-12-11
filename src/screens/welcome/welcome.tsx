@@ -15,10 +15,10 @@ const Welcome = ({navigation}) => {
         alignItems: 'center',
         justifyContent: 'space-between',
       }}>
-      <CustomText unique={true} text1={'Hello'} text2={'Leonard'} />
+      <CustomText textunique={true} unique={true} text1={'Hello,'} text2={'Leonard!'} />
       <Text />
       <Button
-        marginBottom={20}
+        marginBottom={50}
         width={334}
         height={70}
         background="black"

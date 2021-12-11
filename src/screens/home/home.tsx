@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Box, Image, Pressable, Text, FlatList} from 'native-base';
 const Home = () => {
-  const [click, setClicked] = useState(null);
+  const [click, setClicked] = useState('ALL');
   console.log(click);
   const data = ['ALL', 'MUSUEMS', 'HISTORICAL PLACE', 'RESTAURANTS'];
   return (
@@ -18,17 +18,18 @@ const Home = () => {
         horizontal
         renderItem={({item}) => (
           <Box
-            borderWidth={3}
-            borderColor={'white'}
+            borderWidth={2}
+            borderColor={'#D5E5E2'}
             borderRadius={100}
             marginRight={2}
             height={10}
             minWidth={60}
             flexDirection={'row'}
             justifyContent={'center'}
-            backgroundColor={'green.300'}
+            backgroundColor={'#D5E5E2'}
             padding={1}>
             <Text
+            color={'#5B7D76'}
               onPress={() => {
                 setClicked(item);
               }}>
@@ -37,6 +38,10 @@ const Home = () => {
           </Box>
         )}
       />
+      <Text>Top activities</Text>
+      <Box>
+        <FlatList/>
+      </Box>
     </Box>
   );
 };
