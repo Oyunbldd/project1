@@ -1,9 +1,27 @@
 import React, {useState} from 'react';
-import {Box, Image, Pressable, Text, FlatList} from 'native-base';
+import {Box, Text, FlatList} from 'native-base';
+import {useQuery, gql} from '@apollo/client';
+import HomeCarousel from '../../components/homeCarousel';
+const CATEGORIES = gql`
+  query {
+    categoryCollection {
+      items {
+        name
+      }
+    }
+  }
+`;
+type CategoryType = {
+  name: string;
+};
+type CategoriesType = {
+  categoryCollection: {
+    items: CategoryType[];
+  };
+};
 const Home = () => {
-  const [click, setClicked] = useState('ALL');
-  console.log(click);
-  const data = ['ALL', 'MUSUEMS', 'HISTORICAL PLACE', 'RESTAURANTS'];
+  const [click, setClicked] = useState();
+  const {data} = useQuery<CategoriesType>(CATEGORIES);
   return (
     <Box safeArea flex={1} flexDirection={'column'} padding={4}>
       <Text fontSize={18} marginTop={10}>
@@ -13,9 +31,12 @@ const Home = () => {
         Amsterdam!
       </Text>
       <FlatList
-        marginTop={8}
-        data={data}
+        marginTop={4}
+        data={data?.categoryCollection.items}
         horizontal
+        borderColor={'black'}
+        borderWidth={3}
+        maxHeight={50}
         renderItem={({item}) => (
           <Box
             borderWidth={2}
@@ -29,19 +50,19 @@ const Home = () => {
             backgroundColor={'#D5E5E2'}
             padding={1}>
             <Text
-            color={'#5B7D76'}
+              color={'#5B7D76'}
               onPress={() => {
-                setClicked(item);
+                setClicked(item.name);
               }}>
-              {item}
+              {item.name}
             </Text>
           </Box>
         )}
       />
-      <Text>Top activities</Text>
-      <Box>
-        <FlatList/>
-      </Box>
+      <Text mt={4} mb={4} fontSize={20} color="gray.500">
+        Top activities
+      </Text>
+      <HomeCarousel customWidth={380} customHeight={215} />
     </Box>
   );
 };

@@ -21,7 +21,6 @@ const Welcome2 = ({navigation}) => {
         'https://upload.wikimedia.org/wikipedia/commons/a/a9/Heart_of_paris.jpg',
       title: 'France',
     },
-    
   ];
   return (
     <FlatList

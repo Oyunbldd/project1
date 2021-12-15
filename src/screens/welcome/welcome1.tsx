@@ -4,10 +4,9 @@ import {
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
-  Pressable,
 } from 'react-native';
 import {Box, Text, Image, FlatList} from 'native-base';
-import {BlurView} from '@react-native-community/blur';
+//import {BlurView} from '@react-native-community/blur';
 import CustomText from '../../components/text';
 const Welcome1 = ({navigation}) => {
   const windowWidth = Dimensions.get('window').width;
@@ -75,7 +74,6 @@ const Welcome1 = ({navigation}) => {
                 alt="gg"
                 borderColor={'white'}
                 borderWidth={10}
-                borderTopRadius={10}
               />
               <Box
                 background={'white'}
@@ -99,7 +97,7 @@ const Welcome1 = ({navigation}) => {
         flexDirection="row"
         alignItems="center"
         justifyContent="space-evenly">
-        {data.map((val, index) => (
+        {data.map(index => (
           <Box
             key={index}
             width={index == imageIndex ? 8 : 2}
@@ -109,27 +107,35 @@ const Welcome1 = ({navigation}) => {
           />
         ))}
       </Box>
-      <Pressable
-        style={{marginTop: 30}}
+      {/* <Pressable
+        style={{marginTop: 10}}
         onPress={() => {
           navigation.navigate('Home');
         }}>
         <BlurView
           blurAmount={10}
-          width={340}
-          height={70}
           blurType="light"
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 3,
+            width: 340,
+            height: 70,
           }}>
           <Text color="white" fontSize={15} fontWeight="bold">
             EXPLORE THE CITY
           </Text>
         </BlurView>
-      </Pressable>
+      </Pressable> */}
+      <Box width={340} height={70} background={'white'}>
+        <Text
+          onPress={() => {
+            navigation.navigate('Home');
+          }}>
+          Blurview doesn't work
+        </Text>
+      </Box>
 
       <CustomText
         text1={'Choose'}
