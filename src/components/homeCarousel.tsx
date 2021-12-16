@@ -61,6 +61,7 @@ const HomeCarousel = ({customWidth, customHeight, category}) => {
       <FlatList
         data={renderData}
         horizontal
+        pagingEnabled
         onScroll={onScroll}
         keyExtractor={item => item.title}
         showsVerticalScrollIndicator={false}

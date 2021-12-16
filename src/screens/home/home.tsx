@@ -36,6 +36,7 @@ const Home = () => {
       <FlatList
         marginTop={4}
         data={renderData}
+      
         horizontal
         borderColor={'black'}
         borderWidth={3}

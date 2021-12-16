@@ -62,6 +62,7 @@ const Welcome1 = ({navigation}) => {
           data={data}
           horizontal
           onScroll={onScroll}
+          pagingEnabled
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
