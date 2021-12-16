@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useMemo} from 'react';
 import {Box, Text, FlatList} from 'native-base';
 import {useQuery, gql} from '@apollo/client';
 import HomeCarousel from '../../components/homeCarousel';
@@ -20,8 +20,11 @@ type CategoriesType = {
   };
 };
 const Home = () => {
-  const [click, setClicked] = useState();
+  const [click, setClicked] = useState('All');
   const {data} = useQuery<CategoriesType>(CATEGORIES);
+  const renderData = useMemo(() => {
+    return data ? [{name: 'All'}, ...data.categoryCollection.items] : [];
+  }, [data]);
   return (
     <Box safeArea flex={1} flexDirection={'column'} padding={4}>
       <Text fontSize={18} marginTop={10}>
@@ -32,11 +35,12 @@ const Home = () => {
       </Text>
       <FlatList
         marginTop={4}
-        data={data?.categoryCollection.items}
+        data={renderData}
         horizontal
         borderColor={'black'}
         borderWidth={3}
         maxHeight={50}
+        keyExtractor={item => item.name}
         renderItem={({item}) => (
           <Box
             borderWidth={2}
@@ -62,7 +66,7 @@ const Home = () => {
       <Text mt={4} mb={4} fontSize={20} color="gray.500">
         Top activities
       </Text>
-      <HomeCarousel customWidth={380} customHeight={215} />
+      <HomeCarousel customWidth={355} customHeight={215} category={click} />
     </Box>
   );
 };

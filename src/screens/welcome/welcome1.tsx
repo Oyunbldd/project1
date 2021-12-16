@@ -5,8 +5,8 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
-import {Box, Text, Image, FlatList} from 'native-base';
-//import {BlurView} from '@react-native-community/blur';
+import {Box, Text, Image, FlatList,Pressable} from 'native-base';
+import {BlurView} from '@react-native-community/blur';
 import CustomText from '../../components/text';
 const Welcome1 = ({navigation}) => {
   const windowWidth = Dimensions.get('window').width;
@@ -107,7 +107,7 @@ const Welcome1 = ({navigation}) => {
           />
         ))}
       </Box>
-      {/* <Pressable
+      <Pressable
         style={{marginTop: 10}}
         onPress={() => {
           navigation.navigate('Home');
@@ -127,15 +127,15 @@ const Welcome1 = ({navigation}) => {
             EXPLORE THE CITY
           </Text>
         </BlurView>
-      </Pressable> */}
-      <Box width={340} height={70} background={'white'}>
+      </Pressable>
+      {/* <Box width={340} height={70} background={'white'}>
         <Text
           onPress={() => {
             navigation.navigate('Home');
           }}>
           Blurview doesn't work
         </Text>
-      </Box>
+      </Box> */}
 
       <CustomText
         text1={'Choose'}

@@ -2,9 +2,25 @@ import React, {useCallback, useState} from 'react';
 import {NativeSyntheticEvent, NativeScrollEvent} from 'react-native';
 import {useQuery, gql} from '@apollo/client';
 import {Box, Text, FlatList, Image} from 'native-base';
-const ACTIVITY = gql`
+
+const HomeCarousel = ({customWidth, customHeight, category}) => {
+  const [imageIndex, setImageIndex] = useState(0);
+  const ACTIVITY = gql`
+    query {
+      activityCollection(where:{category:{name:"${category}"}}) {
+        items {
+          title
+          rate
+          image {
+            url
+          }
+        }
+      }
+    }
+  `;
+  const ALLACTIVITY = gql`
   query {
-    activityCollection {
+    activityCollection{
       items {
         title
         rate
@@ -14,23 +30,22 @@ const ACTIVITY = gql`
       }
     }
   }
-`;
-type AcitivityType = {
-  title: string;
-  rate: number;
-  image: {
-    url: string;
+  `;
+  type AcitivityType = {
+    title: string;
+    rate: number;
+    image: {
+      url: string;
+    };
   };
-};
-type ActivitiesType = {
-  activityCollection: {
-    items: AcitivityType[];
+  type ActivitiesType = {
+    activityCollection: {
+      items: AcitivityType[];
+    };
   };
-};
-
-const HomeCarousel = ({customWidth, customHeight}) => {
-  const [imageIndex, setImageIndex] = useState(0);
-  const {data} = useQuery<ActivitiesType>(ACTIVITY);
+  const {data} = useQuery<ActivitiesType>(
+    category == 'All' ? ALLACTIVITY : ACTIVITY,
+  );
   const onScroll = useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
       const slideSize = event.nativeEvent.layoutMeasurement.width;
@@ -47,6 +62,7 @@ const HomeCarousel = ({customWidth, customHeight}) => {
         data={renderData}
         horizontal
         onScroll={onScroll}
+        keyExtractor={item => item.title}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => (
