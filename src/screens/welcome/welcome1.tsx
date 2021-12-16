@@ -4,13 +4,18 @@ import {
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  StyleSheet,
 } from 'react-native';
-import {Box, Text, Image, FlatList,Pressable} from 'native-base';
+import {Box, Text, Image, FlatList, Pressable} from 'native-base';
 import {BlurView} from '@react-native-community/blur';
 import CustomText from '../../components/text';
+import Search from '../../components/search';
 const Welcome1 = ({navigation}) => {
   const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   const [imageIndex, setImageIndex] = useState(0);
+  console.log(windowHeight);
+  console.log(windowWidth);
   const data = [
     {
       id: 0,
@@ -51,38 +56,45 @@ const Welcome1 = ({navigation}) => {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
+      <Search />
       <Box
-        width={340}
-        height={450}
+        width={windowWidth * 0.9}
+        height={windowHeight * 0.55}
         marginTop={200}
         borderColor={'white'}
-        borderWidth={10}
+        borderWidth={15}
         borderRadius={5}>
         <FlatList
           data={data}
           horizontal
           onScroll={onScroll}
           pagingEnabled
+          keyExtractor={item => item.title}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
-            <Box display={'flex'} flexDirection={'column'}>
+            <Box
+              display={'flex'}
+              flexDirection={'column'}
+              alignItems={'center'}
+              justifyContent={'center'}
+              height={windowHeight * 0.46}
+              width={windowWidth * 0.82}>
               <Image
                 source={{uri: item.imgUrl}}
-                width={334}
-                height={380}
-                alignSelf={'center'}
+                width={windowWidth * 0.9 - 10}
+                height={windowHeight * 0.48}
                 alt="gg"
-                borderColor={'white'}
-                borderWidth={10}
               />
               <Box
                 background={'white'}
                 flexDirection={'row'}
                 justifyContent={'center'}
-                width={334}
+                width={340}
                 height={50}>
-                <Text fontSize={20}>{item.title}</Text>
+                <Text fontSize={25} letterSpacing={2} fontWeight={'bold'}>
+                  {item.title}
+                </Text>
               </Box>
             </Box>
           )}
@@ -92,23 +104,27 @@ const Welcome1 = ({navigation}) => {
         backgroundColor="white"
         width={100}
         height={8}
-        mt={-4}
+        mt={-5}
         borderRadius={10}
         display="flex"
         flexDirection="row"
         alignItems="center"
         justifyContent="space-evenly">
-        {data.map(index => (
+        {data.map((dt, index) => (
           <Box
             key={index}
-            width={index == imageIndex ? 8 : 2}
-            backgroundColor={index == imageIndex ? 'green.400' : 'gray.500'}
-            borderRadius={100}
-            height={2}
+            style={[
+              styles.indicator,
+              {
+                width: index == imageIndex ? 25 : 6,
+                borderRadius: 3,
+                opacity: 1 - (1 / data.length) * Math.abs(imageIndex - index),
+              },
+            ]}
           />
         ))}
       </Box>
-      <Pressable
+      {/* <Pressable
         style={{marginTop: 10}}
         onPress={() => {
           navigation.navigate('Home');
@@ -128,15 +144,17 @@ const Welcome1 = ({navigation}) => {
             EXPLORE THE CITY
           </Text>
         </BlurView>
-      </Pressable>
-      {/* <Box width={340} height={70} background={'white'}>
-        <Text
-          onPress={() => {
-            navigation.navigate('Home');
-          }}>
-          Blurview doesn't work
-        </Text>
-      </Box> */}
+      </Pressable> */}
+
+      <Text
+        mt={4}
+        fontSize={20}
+        color={'black'}
+        onPress={() => {
+          navigation.navigate('Home');
+        }}>
+        Blurview doesn't work
+      </Text>
 
       <CustomText
         text1={'Choose'}
@@ -147,4 +165,12 @@ const Welcome1 = ({navigation}) => {
     </ImageBackground>
   );
 };
+const styles = StyleSheet.create({
+  indicator: {
+    width: 6,
+    height: 6,
+    backgroundColor: 'green',
+    borderRadius: 3,
+  },
+});
 export default Welcome1;

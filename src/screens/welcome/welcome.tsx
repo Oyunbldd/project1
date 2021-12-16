@@ -1,9 +1,11 @@
 import React from 'react';
-import {Button, Text} from 'native-base';
+import {Text} from 'native-base';
 import {ImageBackground, Dimensions} from 'react-native';
 import CustomText from '../../components/text';
+import CustomButton from '../../components/customButton';
 const Welcome = ({navigation}) => {
   const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   return (
     <ImageBackground
       source={require('../../photos/welcome.png')}
@@ -15,19 +17,18 @@ const Welcome = ({navigation}) => {
         alignItems: 'center',
         justifyContent: 'space-between',
       }}>
-      <CustomText textunique={true} unique={true} text1={'Hello,'} text2={'Leonard!'} />
+      <CustomText
+        textunique={true}
+        unique={true}
+        text1={'Hello,'}
+        text2={'Leonard!'}
+      />
       <Text />
-      <Button
-        marginBottom={50}
-        width={334}
-        height={70}
-        background="black"
-        fontSize={30}
-        onPress={() => {
-          navigation.navigate('Welcome1');
-        }}>
-        EXPLORE
-      </Button>
+      <CustomButton
+        text={'EXPLORE'}
+        navigation={navigation}
+        navigateText={'Welcome1'}
+      />
     </ImageBackground>
   );
 };

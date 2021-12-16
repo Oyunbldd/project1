@@ -14,6 +14,8 @@ target 'project1' do
 
   pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'project1Tests' do
     inherit! :complete
     # Pods for testing
